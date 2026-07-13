@@ -1,0 +1,30 @@
+USE ai_job_agent;
+
+CREATE TABLE IF NOT EXISTS application_record (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT NOT NULL COMMENT '用户ID',
+  resume_id BIGINT DEFAULT NULL COMMENT '简历ID',
+  job_post_id BIGINT DEFAULT NULL COMMENT '岗位ID',
+  match_report_id BIGINT DEFAULT NULL COMMENT '匹配报告ID',
+  company_name VARCHAR(100) NOT NULL COMMENT '公司名称',
+  job_name VARCHAR(100) NOT NULL COMMENT '岗位名称',
+  city VARCHAR(50) DEFAULT NULL COMMENT '城市',
+  salary VARCHAR(50) DEFAULT NULL COMMENT '薪资',
+  jd_text LONGTEXT COMMENT '岗位JD原文',
+  match_score INT DEFAULT NULL COMMENT '匹配分数，0-100',
+  status VARCHAR(30) NOT NULL DEFAULT 'NOT_APPLIED' COMMENT '投递状态：NOT_APPLIED未投递 APPLIED已投递 COMMUNICATING待沟通 INTERVIEWING面试中 REJECTED已拒绝 PASSED已通过',
+  remark TEXT COMMENT '备注',
+  create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  deleted TINYINT NOT NULL DEFAULT 0 COMMENT '逻辑删除：0未删除 1已删除',
+  KEY idx_user_id (user_id),
+  KEY idx_resume_id (resume_id),
+  KEY idx_job_post_id (job_post_id),
+  KEY idx_match_report_id (match_report_id),
+  KEY idx_status (status),
+  KEY idx_user_status (user_id, status),
+  KEY idx_user_create_time (user_id, create_time),
+  KEY idx_deleted (deleted),
+  CONSTRAINT chk_application_status CHECK (status IN ('NOT_APPLIED', 'APPLIED', 'COMMUNICATING', 'INTERVIEWING', 'REJECTED', 'PASSED')),
+  CONSTRAINT chk_application_match_score CHECK (match_score IS NULL OR (match_score >= 0 AND match_score <= 100))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='投递记录表';

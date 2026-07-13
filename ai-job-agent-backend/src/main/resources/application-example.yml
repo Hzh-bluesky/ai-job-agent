@@ -1,0 +1,64 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ai-job-agent-backend
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/ai_job_agent?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:ai_job_agent_user}
+    password: ${DB_PASSWORD:change-me}
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+jwt:
+  secret: ${JWT_SECRET:please-change-this-jwt-secret-at-least-32-bytes}
+  expiration-seconds: ${JWT_EXPIRATION_SECONDS:86400}
+
+llm:
+  provider: ${LLM_PROVIDER:mock}
+  fallback-mock: true
+  deepseek:
+    api-key: ${DEEPSEEK_API_KEY:}
+    base-url: https://api.deepseek.com
+    model: deepseek-chat
+    temperature: 0.2
+    max-tokens: 8192
+    timeout-seconds: 60
+  groq:
+    api-key: ${GROQ_API_KEY:}
+    base-url: https://api.groq.com/openai/v1
+    model: llama-3.1-8b-instant
+    temperature: 0.2
+    max-tokens: 4096
+    timeout-seconds: 60
+  qwen:
+    api-key: ${DASHSCOPE_API_KEY:}
+    base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
+    model: qwen-plus
+    temperature: 0.2
+    max-tokens: 4096
+    timeout-seconds: 60
+  fastapi:
+    base-url: ${AI_SERVICE_BASE_URL:http://localhost:8000}
+    provider: ${AI_SERVICE_PROVIDER:qwen}
+    model: ${AI_SERVICE_MODEL:qwen-plus}
+    timeout-seconds: ${AI_SERVICE_TIMEOUT_SECONDS:90}

@@ -1,0 +1,85 @@
+# System and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# Codex/local working folders
+.agents/
+.codex/
+work/
+outputs/
+
+# Java / Spring Boot
+**/target/
+*.class
+*.jar
+*.war
+*.log
+logs/
+**/logs/
+
+# Node / Vue / Vite
+**/node_modules/
+**/dist/
+**/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python / FastAPI
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.venv/
+**/venv/
+**/env/
+
+# Environment and private config
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+application-local.yml
+application-local.yaml
+application-local.properties
+**/application-local.yml
+**/application-local.yaml
+**/application-local.properties
+*.key
+*.pem
+*.p12
+*.jks
+*secret*
+*credentials*.json
+
+# Uploads and generated user files
+uploads/
+upload/
+files/
+storage/
+**/uploads/
+**/upload/
+
+# Database backups and dumps
+*.bak
+*.backup
+*.dump
+*.sql.gz
+*.mysql
+*.sqlite
+*.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+~$*

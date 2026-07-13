@@ -1,0 +1,32 @@
+USE ai_job_agent;
+
+CREATE TABLE IF NOT EXISTS ai_call_log (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT DEFAULT NULL COMMENT 'user id',
+  agent_name VARCHAR(100) NOT NULL COMMENT 'agent name',
+  skill_name VARCHAR(100) NOT NULL COMMENT 'skill name',
+  provider VARCHAR(50) NOT NULL COMMENT 'llm provider',
+  model VARCHAR(100) DEFAULT NULL COMMENT 'llm model',
+  prompt LONGTEXT COMMENT 'request prompt',
+  response_body LONGTEXT COMMENT 'llm response body',
+  success TINYINT NOT NULL DEFAULT 0 COMMENT '0 failed, 1 success',
+  error_message TEXT COMMENT 'error message',
+  latency_ms BIGINT DEFAULT NULL COMMENT 'request latency milliseconds',
+  attempt_count INT DEFAULT NULL COMMENT 'current attempt number',
+  quality_score INT DEFAULT NULL COMMENT 'local evaluation score 0-100',
+  evaluation_passed TINYINT DEFAULT NULL COMMENT '0 failed, 1 passed',
+  evaluation_issues TEXT COMMENT 'local evaluation issues',
+  failure_type VARCHAR(50) DEFAULT NULL COMMENT 'failure type for retry/fallback decision',
+  fallback_used TINYINT NOT NULL DEFAULT 0 COMMENT '0 no fallback, 1 fallback mock used',
+  create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
+  update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
+  deleted TINYINT NOT NULL DEFAULT 0 COMMENT 'logic delete: 0 normal, 1 deleted',
+  KEY idx_user_id (user_id),
+  KEY idx_agent_skill (agent_name, skill_name),
+  KEY idx_provider_model (provider, model),
+  KEY idx_success (success),
+  KEY idx_eval_passed (evaluation_passed),
+  KEY idx_failure_type (failure_type),
+  KEY idx_create_time (create_time),
+  KEY idx_deleted (deleted)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='AI call log';
