@@ -119,18 +119,39 @@ Vite 已配置 `/api` 代理到 `http://localhost:8080`。
 | `DASHSCOPE_API_KEY` | 通义千问 DashScope API Key | 留空或填真实值 |
 | `AI_SERVICE_BASE_URL` | FastAPI 微服务地址 | `http://localhost:8000` |
 
-## 功能截图
+## 项目截图
 
-> 暂无正式截图，可在后续补充以下页面截图。
+> 以下图片使用相对路径引用。请将真实运行截图放入 `docs/images/` 目录后再提交。
 
-| 页面 | 截图 |
-| --- | --- |
-| 登录页 | 待补充 |
-| 工作台 | 待补充 |
-| 简历管理 | 待补充 |
-| 岗位分析 | 待补充 |
-| 匹配报告 | 待补充 |
-| 面试题生成 | 待补充 |
+### 登录页
+
+Vue3 前端登录界面，展示 AI Job Agent 的入口页与基础鉴权流程。
+
+![登录页](docs/images/login.png)
+
+### 工作台
+
+Vue3 前端工作台界面，集中展示岗位分析、简历管理、匹配报告和 AI 能力入口。
+
+![工作台](docs/images/dashboard.png)
+
+### 岗位分析
+
+岗位 JD 智能解析页面，支持粘贴岗位 JD，并提取岗位要求、技术栈、加分项和风险点。
+
+![岗位分析](docs/images/job-analysis.png)
+
+### 匹配报告
+
+简历与岗位匹配评分页面，展示综合匹配度、分项评分、优势分析、不足分析和补强建议。
+
+![匹配报告](docs/images/match-report.png)
+
+### AI 面试准备
+
+AI 面试准备页面，根据岗位信息和简历内容，生成针对性的面试问题和准备建议。
+
+![AI 面试准备](docs/images/interview-preparation.png)
 
 ## 已实现功能
 
